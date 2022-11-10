@@ -56,7 +56,7 @@ let users = [
         "address": "314 Dunne Place, Bawcomville, Guam, 9053"
     }
 ]
-
+// ============================================================Variant 1=================================================
 const phoneOverTwoThousand = users.reduce((accum, user) => {
     const correctBalance = user.balance.replaceAll(',', '').replaceAll('$', '');
 
@@ -73,3 +73,16 @@ const sumTotal = users.reduce((accum, user) => {
     return accum + Number(correctBalance);
 }, 0);
 console.log(sumTotal);
+
+// ===============================================================Variant 2==================================================
+const phoneAndSum = users.reduce((accum, user) => {
+    const correctBalance = Number(user.balance.replaceAll(',', '').replaceAll('$', ''));
+
+    accum.sum += correctBalance
+
+    if (correctBalance >= 2000) {
+        accum.phoneOverTwoThousand.push(user.phone)
+    }
+    return accum;
+}, {phoneOverTwoThousand: [], sum: 0});
+console.log(phoneAndSum);
